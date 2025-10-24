@@ -1,40 +1,18 @@
-#include <iostream>
-#include <unistd.h>
-#include <sys/wait.h>
-#include <sys/types.h>
-using namespace std;
+# wait / waitpid
+Waits for a child process to finish execution and collects its exit status, preventing zombie processes.
 
-int status;
-void FindError(){
+#Macros of Waitpid
+WIFEXITED(status) – checks if the child ended normally;
+WEXITSTATUS(status) – gets child’s exit code;
+WIFSIGNALED(status) – true if terminated by a signal;
+WTERMSIG(status) – gets signal number that killed the process.
 
-         if (WIFSIGNALED(status) == 1) {
-         if (WTERMSIG(status) == 11) {
-         cout << "segmentation violation\n";
-         }
-         else if (WTERMSIG(status) == 8) {
-         cout << "program crashed due to division\>
-         }
-         else {
-         cout << "program crashed due to signal\n";
-         }
-         }
-        else if (WIFEXITED(status) == 0) {
-         cout << "program crashed\n";}
-         else {
-         cout << "program succeeded\n";
-        }
-        }
+#How to Use:
+Call waitpid(child_pid, &status, 0); then use macros to analyze status.
 
-int main(int argc, char *argv[])
-{
-        pid_t  program = fork();
+#fork()
+Creates a new child process by duplicating the current process; returns 0 in the child and child PID in the parent.
 
-        if(program == 0){
-        execvp(argv[1] ,&argv[1]);
-        }
-        else if(program > 0){
-        waitpid(program, &status ,0);
-        FindError();
-        }
-  return 0;
-}
+#execvp()
+Replaces the current process image with a new program, executing another binary within the same process space.
+
