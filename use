@@ -1,0 +1,7 @@
+To use debugger 
+1. Create a file and add code in it.
+2. Compile it.
+3. Create target file and compile it.
+4. use ./debugger ./target to use debugger 
+
+THANKS
