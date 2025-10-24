@@ -1,4 +1,4 @@
-# The main libraries used in the project are
+# The main libraries (except iostream) used in the project are
 
 
 
@@ -11,5 +11,3 @@
 
 
 <sys/types.h>
-
-<iostream>
